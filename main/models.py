@@ -1,3 +1,5 @@
+#database tabels
+
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth import get_user_model
@@ -6,20 +8,20 @@ from tinymce.models import HTMLField
 from taggit.managers import TaggableManager
 from django.shortcuts import reverse
 
-User = get_user_model()
+User = get_user_model() #ready model for user imported from django.contrib.auth
 
 class Author(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=40, blank=True)
-    slug = slug = models.SlugField(max_length=400, unique=True, blank=True)
-    bio = HTMLField()
-    points = models.IntegerField(default=0)
-    profile_pic = ResizedImageField(size=[50, 80], quality=100, upload_to="authors", default=None, null=True, blank=True)
+    slug = slug = models.SlugField(max_length=400, unique=True, blank=True) # imported from django.utils.text
+    bio = HTMLField() #desctription of the user imported the field from tinymce.models
+    points = models.IntegerField(default=0) #check later if we need this (maybe put here the rating)
 
-
+    #Display the name insted of "object 1" in the admin page
     def __str__(self):
         return self.fullname
 
+    # save button
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.fullname)
@@ -30,11 +32,13 @@ class Category(models.Model):
     slug = models.SlugField(max_length=400, unique=True, blank=True)
     description = models.TextField(default="description")
 
+#Meta is basically the inner class of your model class.
     class Meta:
         verbose_name_plural = "categories"
     def __str__(self):
         return self.title
 
+    # save button
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -42,7 +46,7 @@ class Category(models.Model):
 
 #acces to each category
     def get_url(self):
-        return reverse("posts", kwargs={
+        return reverse("posts", kwargs={ #imported from django.shortcuts
             "slug": self.slug
         })
 
@@ -67,7 +71,7 @@ class Reply(models.Model):
     class Meta:
         verbose_name_plural = "replies"
 
-
+#create sub forums
 class Comment(models.Model):
     user = models.ForeignKey(Author, on_delete=models.CASCADE)
     content = models.TextField()
@@ -80,15 +84,16 @@ class Comment(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=400)
     slug = models.SlugField(max_length=400, unique=True, blank=True)
-    user = models.ForeignKey(Author, on_delete=models.CASCADE)
+    user = models.ForeignKey(Author, on_delete=models.CASCADE) #frame key of the author
     content = HTMLField()
     categories = models.ManyToManyField(Category)
     date = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=False)
 
-    tags = TaggableManager()
+    tags = TaggableManager() #imported from taggit.managers
     comments = models.ManyToManyField(Comment, blank=True)
 
+#save button
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
