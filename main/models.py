@@ -13,7 +13,7 @@ User = get_user_model() #ready model for user imported from django.contrib.auth
 class Author(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=40, blank=True)
-    slug = slug = models.SlugField(max_length=400, unique=True, blank=True) # imported from django.utils.text
+    slug = models.SlugField(max_length=400, unique=True, blank=True) # imported from django.utils.text
     bio = HTMLField() #desctription of the user imported the field from tinymce.models
     points = models.IntegerField(default=0) #check later if we need this (maybe put here the rating)
 
