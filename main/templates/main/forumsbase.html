@@ -15,18 +15,27 @@
 <body>
     <header>
         <!--NavBar Section-->
+        <label for="menuShowHide"></label>
+            <ul id="mainMenu">
+            	<li><a href="{% url 'home' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                 {% else %}
+            	<li><a href="{% url 'signin' %}">Signin</a></li>
+            	<li><a href="{% url 'signup' %}">Signup</a></li>
+                 {% endif %}
+            </ul>
         <div class="navbar">
             <nav class="navigation hide" id="navigation">
-                <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="forums.html">Forums</a></li>
-                    <li class="nav-item"><a href="posts.html">Posts</a></li>
-                    <li class="nav-item"><a href="detail.html">Detail</a></li>
-                </ul>
+                    <a href="{% url 'home' %}">Home</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                    <a href="{% url 'signup' %}">Signup</a>
+                    <a href="{% url 'signin' %}">Signin</a>
+                    {% endif %}
             </nav>
-            <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
-            <div class="brand">Travel Advice Forum</div>
-        </div>
+            <div class="brand">Travel Advice</div>
     </header>
     {% block content %}
     {% endblock content %}

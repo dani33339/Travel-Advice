@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm , AuthenticationForm
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
 from register.forms import UpdateForm
+from django.contrib.auth import logout as lt
 
 def signup(request):
     context={}
@@ -51,3 +52,8 @@ def update_profile(request):
     })
 
     return render(request, "register/update.html", context)
+
+@login_required
+def logout(request):
+    lt(request)
+    return redirect("home")
