@@ -5,7 +5,7 @@ password: 123456
 some usefull commends:
 python manage.py runserver
 
-myenv\scripts\activate
+env\scripts\activate
 
 python manage.py makemigrations
 
@@ -24,3 +24,5 @@ pip install django-taggit
 
 pip install Pillow
 -PIL is the Python Imaging Library 
+
+pip install django-crispy-forms
