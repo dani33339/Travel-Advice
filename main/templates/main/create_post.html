@@ -1,10 +1,10 @@
-% extends 'register/forumsbase.html' %}
+{% extends 'register/forumsbase.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
 
 <h1 style="text-align:center; margin-block:50px; color:red;">Hey {{user}},Write Something</h1>
 
- <form method="POST" action="." style="margin-left:150px;">
+ <form method="POST" style="margin-left:150px;">
      {% csrf_token %}
      {{form|crispy}}
      <input type="submit" value="Save" style="margin-block:50px;">
