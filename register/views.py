@@ -28,6 +28,7 @@ def signin(request):
             password= form.cleaned_data.get("password")
             user = authenticate(username=user,password=password)
             if user is not None:
+                login(request, user)
                 return redirect("home")
     context.update({
         "form":form,
