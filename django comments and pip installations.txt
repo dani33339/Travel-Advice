@@ -1,0 +1,26 @@
+admin panel:
+user: admin
+password: 123456
+
+some usefull commends:
+python manage.py runserver
+
+myenv\scripts\activate
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+
+installations made:
+pip install django-resized 
+- in order to resize images for the profile 
+
+pip install django-tinymce
+- django-tinymce is a Django application that contains a widget to render a form field as a TinyMCE editor.
+
+pip install django-taggit 
+- Django-Taggit is a Django application which is used to add tags to blogs, articles etc. It makes very easy for us to make adding the tags functionality to our django project
+
+pip install Pillow
+-PIL is the Python Imaging Library 
