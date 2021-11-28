@@ -20,6 +20,7 @@
             	<li><a href="{% url 'home' %}">Home</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'update_profile' %}">Update Profile</a></li>
                  {% else %}
             	<li><a href="{% url 'signin' %}">Signin</a></li>
             	<li><a href="{% url 'signup' %}">Signup</a></li>
@@ -36,6 +37,9 @@
                     {% endif %}
             </nav>
             <div class="brand">Travel Advice</div>
+            {% if user.is_authenticated %}
+            <div style="font-size:50px;font-weight300px;margin-left:100px"><a href="{% url 'create_post' %}">+</a></div>
+            {% endif %}
     </header>
     {% block content %}
     {% endblock content %}
