@@ -28,6 +28,9 @@ and login in to the admin panel:
 user: admin
 password: 123456
 
+in order to run unit tests you need to write the following command in your terminal :
+
+python manage.py test
 
 for any questions feel free to contact us
 Pavel - pavelko@ac.sce.ac.il
