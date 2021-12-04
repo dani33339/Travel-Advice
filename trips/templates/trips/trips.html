@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<p>Hello you are on the {{page}} page </p>
+
+{% if number > 10  %}
+<p>Number is greater than 10</p>
+
+{% elif number == 10 %}
+<p>Number is exactly 10 </p>
+
+{% else %}
+<p>Number is less than 10</p>
+{% endif %}
+
+<hr>
+<h1>trips</h1>
+
+<ul>
+    {% for trip in trips %}
+    <li>Title:<a href="{% url 'trip' trip.id%}">{{trip.title}} </a>---- {{trip.description}}</li>
+
+
+
+    {% endfor %}
+</ul>
+     
+     
+{% endblock content %}
