@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .models import Trip
 
 TripsSList = [
 
@@ -22,16 +22,12 @@ TripsSList = [
 ]
 
 def trips(request): 
-    page = 'trips'
-    number = 9
-    context = {'page':page, 'number':number,'trips':TripsSList}
+    trips = Trip.objects.all()
+    context = {'trips': trips}
     return render(request, 'trips/trips.html',context)
 
 
 
 def trip(request,pk): 
-    tripsObj = None
-    for i in TripsSList: 
-        if i['id'] == pk: 
-            tripsObj = i
-    return render(request, 'trips/single-trip.html',{'trip':tripsObj})
+    tripObj = Trip.objects.get(id=pk)
+    return render(request, 'trips/single-trip.html',{'trip':tripObj})
