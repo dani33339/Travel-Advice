@@ -1,7 +1,11 @@
 {% extends 'main.html' %}
  {% block content %}
 <h1>{{trip.title}}</h1>
-<br>
+<hr>
+{% for tag in tags %}
+    <span style = "border:1px solid grey">{{tag}}</span>
+{% endfor %}
+<hr>
 <p> {{trip.description}} </p>
 
 

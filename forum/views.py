@@ -37,7 +37,7 @@ def create_post(request):
             new_post = form.save(commit=False)
             new_post.user = author
             new_post.save()
-            return redirect("home")
+            return redirect("trips")
     context.update({
         "form": form,
         "title": "Create New Post",

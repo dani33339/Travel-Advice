@@ -13,4 +13,5 @@ def trips(request):
 
 def trip(request,pk): 
     tripObj = Trip.objects.get(id=pk)
-    return render(request, 'trips/single-trip.html',{'trip':tripObj})
+    tags = tripObj.tags.all()
+    return render(request, 'trips/single-trip.html',{'trip':tripObj, 'tags': tags})

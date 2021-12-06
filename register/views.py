@@ -29,7 +29,7 @@ def signin(request):
             user = authenticate(username=user,password=password)
             if user is not None:
                 login(request, user)
-                return redirect("home")
+                return redirect("trips")
     context.update({
         "form":form,
         "title":"Signin",
@@ -46,7 +46,7 @@ def update_profile(request):
             update_profile=form.save(commit=False)
             update_profile.user=user
             update_profile.save()
-            return redirect("home")
+            return redirect("trips")
     context.update({
         "form": form,
         "title": "Update",
@@ -57,4 +57,4 @@ def update_profile(request):
 @login_required
 def logout(request):
     lt(request)
-    return redirect("home")
+    return redirect("trips")
