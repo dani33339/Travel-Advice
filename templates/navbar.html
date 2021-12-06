@@ -10,9 +10,11 @@
         <nav class="header__nav">
             <h1>Logo</h1>
             </label>
+                <li class="header__menuItem"><a href="{% url 'trips' %}">Home</a></li>
                 <li class="header__menuItem"><a href="{% url 'forumhome' %}">forum</a></li>
                 {% if user.is_authenticated %}
                 <li class="header__menuItem"><a href="{% url 'logout' %}">Logout</a></li>
+                <li class="header__menuItem"><a href="{% url 'create-trip' %}">Add Trip</a></li>
                 {% else %}
                 <li class="header__menuItem"><a href="{% url 'signin' %}">Signin</a></li>
                 <li class="header__menuItem"><a href="{% url 'signup' %}" class="btn btn--sub">Signup</a></li>

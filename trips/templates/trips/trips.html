@@ -6,24 +6,26 @@
 
 <table>
     <tr>
-        <th>ID</th>
         <th>Trip</th>
         <th>Positive Votes</th>
         <th>Votes</th>
         <th></th>
+        <th></th>
     </tr>
     {% for trip in trips %}
         <tr>
-            <td>{{trip.id}}</td>
             <td>{{trip.title}}</td>
             <td>{{trip.vote_ration}}%</td>
             <td>{{trip.vote_total}}</td>
             <td>{{trip.created}}</td>
-            <td><a href="{% url 'trip' trip.id%}">Views</a></td>
+            <td><a href="{% url 'update-trip' trip.id %}">Edit</a></td>
+            <td><a href="{% url 'delete-trip' trip.id %}">Delete</a></td>
+            <td><a href="{% url 'trip' trip.id %}">Views</a></td>
         </tr>
     {% endfor %}
 </table>
 
+<p>FOOTER</p>
 
      
      
