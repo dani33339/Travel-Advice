@@ -1,5 +1,8 @@
 {% extends 'main.html' %}
+
  {% block content %}
+
+ <img style="max-width:500px" src="{{ trip.featured_image.url }}">
 <h1>{{trip.title}}</h1>
 <hr>
 {% for tag in tags %}

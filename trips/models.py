@@ -6,6 +6,7 @@ import uuid
 class Trip(models.Model): 
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank = True)
+    featured_image = models.ImageField(null = True, blank = True, default= "default.jpg")# upload image from the trip, and by the default its gray image 
     created = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField('Tag', blank=True) #one trip has many tag and vice versa
     vote_total = models.IntegerField(default=0, null=True, blank=True)# all the vote that the trips has

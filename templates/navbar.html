@@ -1,25 +1,15 @@
 {% load static %}
-
-<!-- Header Section -->
-<header class="header">
-    <div class="container container--narrow">
-        <a href="{}" class="header__logo">
-            <img src="{} " alt="" />
-        </a>
-
-        <nav class="header__nav">
-            <h1>Logo</h1>
-            </label>
-                <li class="header__menuItem"><a href="{% url 'trips' %}">Home</a></li>
-                <li class="header__menuItem"><a href="{% url 'forumhome' %}">forum</a></li>
-                {% if user.is_authenticated %}
-                <li class="header__menuItem"><a href="{% url 'logout' %}">Logout</a></li>
-                <li class="header__menuItem"><a href="{% url 'create-trip' %}">Add Trip</a></li>
-                {% else %}
-                <li class="header__menuItem"><a href="{% url 'signin' %}">Signin</a></li>
-                <li class="header__menuItem"><a href="{% url 'signup' %}" class="btn btn--sub">Signup</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
-</header>
+        
+<a href="{% url 'trips' %}" class="header__logo">
+    <img src="{% static 'images/logo.png' %} " />
+</a>
+<a href="{% url 'trips' %}">Home</a>
+<a href="{% url 'forumhome' %}">forum</a>
+{% if user.is_authenticated %}
+<a href="{% url 'logout' %}">Logout</a>
+<a href="{% url 'create-trip' %}">Add Trip</a>
+{% else %}
+<a href="{% url 'signin' %}">Signin</a>
+<a href="{% url 'signup' %}" class="btn btn--sub">Signup</a></li>
+{% endif %}
+<hr>                

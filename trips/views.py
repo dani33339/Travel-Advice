@@ -21,7 +21,7 @@ def createTrip(request):
     form = TripForm()
 
     if request.method =='POST':
-        form = TripForm(request.POST)
+        form = TripForm(request.POST, request.FILES)
         if form.is_valid(): 
             form.save()
             return redirect('trips')
@@ -33,7 +33,7 @@ def updateTrip(request,pk):
     form = TripForm(instance=trip)
 
     if request.method =='POST':
-        form = TripForm(request.POST, instance=trip)
+        form = TripForm(request.POST, request.FILES,instance=trip)
         if form.is_valid(): 
             form.save()
             return redirect('trips')
