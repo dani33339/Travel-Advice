@@ -17,6 +17,10 @@ pip install Pillow
 
 pip install django-crispy-forms
 
+pip install whitenoise
+-With a couple of lines of config WhiteNoise allows your web app to serve its own static files
+
+
 after the installation of the pip's you need to write the following command in your terminal :
 
 python manage.py runserver

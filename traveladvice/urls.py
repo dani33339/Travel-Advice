@@ -14,3 +14,4 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)# connect MEDIA_URL with MEDIA_ROOT in settings
+urlpatterns += static(settings.STATIC_URL,document_root = settings.STATIC_ROOT)# connect MEDIA_URL with MEDIA_ROOT in settings
