@@ -2,23 +2,6 @@
 {% block content %}
 
 
-<table>
-    <tr>
-        <th>Trip</th>
-        <th>Positive Votes</th>
-        <th>Votes</th>
-        <th></th>
-        <th></th>
-    </tr>
-    {% for trip in trips %}
-        <tr>
-            
-            <td><a href="{% url 'update-trip' trip.id %}">Edit</a></td>
-            <td><a href="{% url 'delete-trip' trip.id %}">Delete</a></td>
-            <td><a href="{% url 'trip' trip.id %}">Views</a></td>
-        </tr>
-    {% endfor %}
-</table>
 
 
   <!-- Main Section -->
@@ -26,15 +9,15 @@
     <section class="hero-section text-center">
       <div class="container container--narrow">
         <div class="hero-section__box">
-          <h2>Search for <span>Projects</span></h2>
+          <h2>Search for <span>Trips</span></h2>
         </div>
 
         <div class="hero-section__search">
           <form class="form" action="#" method="get">
             <div class="form__field">
-              <label for="formInput#search">Search By Projects </label>
+              <label for="formInput#search">Search By Trip </label>
               <input class="input input--text" id="formInput#search" type="text" name="text"
-                placeholder="Search by Project Title" />
+                placeholder="Search by Trip Title" />
             </div>
 
             <input class="btn btn--sub btn--lg" type="submit" value="Search" />
@@ -57,18 +40,14 @@
                   <p><a class="project__author" href="profile.html">By Dennis Ivanov</a></p>
                   <p class="project--rating">
                     <span style="font-weight: bold;">{{trip.vote_ration}}%</span> Positive
-                    Feedback ({{trip.vote_total}} Votes)
+                    Feedback ({{trip.vote_total}}) Vote{{trip.vote_total|pluralize:"s"}}
                   </p>
                   <div class="project__tags">
+                    {% for tag in trip.tags.all %}
                     <span class="tag tag--pill tag--main">
-                      <small>NextJS</small>
+                      <small>{{ tag }}</small>
                     </span>
-                    <span class="tag tag--pill tag--main">
-                      <small>GraphQL</small>
-                    </span>
-                    <span class="tag tag--pill tag--main">
-                      <small>TypeScript</small>
-                    </span>
+                    {% endfor %}
                   </div>
                 </div>
               </a>
