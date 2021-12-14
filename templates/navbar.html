@@ -20,6 +20,7 @@
           <li class="header__menuItem"><a href="{% url 'create-trip' %}">Add Trip</a></li>
           <li class="header__menuItem"><a href="account.html">My Account</a></li>
           <li class="header__menuItem"><a href="{% url 'create_post' %}">Post Something!</a></li>
+          <li class="header__menuItem"><a href="{% url 'update_profile' %}">Update Profile</a></li>
           <li class="header__menuItem"><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}  
           <li class="header__menuItem"><a href="{% url 'signin' %}" class="btn btn--sub">Login</a></li>

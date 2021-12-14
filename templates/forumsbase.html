@@ -1,52 +1,28 @@
-{% load static %}
 
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="{% static 'uikit/styles/uikit.css' %}" />
+     <link rel="stylesheet" href="{% static 'styles/app.css' %}" />
 </head>
 
 <body>
     <header>
-        <!--NavBar Section-->
+       {% include 'navbar.html' %}
 
-        <label for="menuShowHide"></label>
-           <ul id="mainMenu">
-            	<a href="{% url 'trips' %}">Home</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}">Logout</a>
-                 {% else %}
-            	    <a href="{% url 'signin' %}">Signin</a>
-            	    <a href="{% url 'signup' %}">Signup</a>
-                 {% endif %}
-            </ul>
-        <div class="navbar">
-            <nav class="navigation hide" id="navigation">
-                    <a href="{% url 'trips' %}">Home</a>
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}">Logout</a>
-                    {% else %}
-                    <a href="{% url 'signup' %}">Signup</a>
-                    <a href="{% url 'signin' %}">Signin</a>
-                    {% endif %}
-            </nav>
-            <div class="brand">Travel Advice</div>
-            {% if user.is_authenticated %}
-            <div style="font-size:50px;font-weight300px;margin-left:100px"><a href="{% url 'create_post' %}">CreatePost</a></div>
-            {% endif %}
     </header>
     {% block content %}
     {% endblock content %}
 
-    <footer>
-        <span>&copy;  TravelAdvice | All Rights Reserved</span>
-    </footer>
+
     <script src="main.js"></script>
 </body>
 </html>
