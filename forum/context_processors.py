@@ -1,4 +1,4 @@
-from main.models import Post
+from forum.models import Post
 
 def searchFunction(request):
     search_context = {}
@@ -11,6 +11,7 @@ def searchFunction(request):
             objects = posts.filter(content__icontains=query)
         else:
             objects = posts.filter(title__icontains=query)
+
         #ends here
         search_context = {
             "objects":objects,
