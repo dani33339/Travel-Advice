@@ -22,6 +22,8 @@ def forumhome(request):
         "num_users":num_users,
         "num_categories":num_categories,
         "last_post":last_post,
+        "title": "Forum",
+
     }
     return render(request,'forum/forums.html', context)
 
@@ -43,7 +45,7 @@ def detail(request, slug):
 
 def posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    posts = Post.objects.filter(approved=True, categories=category)
+    posts = Post.objects.filter(categories=category)
     #display the posts in pages
     paginator = Paginator(posts, 5)
     page = request.GET.get("page")
@@ -59,8 +61,8 @@ def posts(request, slug):
         "title": "Posts"
 
     }
-
     return render(request, 'forum/posts.html', context)
+
 @login_required
 def create_post(request):
     context = {}
@@ -71,7 +73,7 @@ def create_post(request):
             new_post = form.save(commit=False)
             new_post.user = author
             new_post.save()
-            return redirect("trips")
+            return redirect("forumhome")
     context.update({
         "form": form,
         "title": "Create New Post",
@@ -82,6 +84,11 @@ def latest_posts(request):
     posts = Post.objects.all().filter(approved=True)[:10]
     context = {
         "posts":posts,
+        "title": "latest-posts",
     }
 
     return render(request, "forum/latest-posts.html", context)
+
+def search_result(request):
+
+    return render(request, "forum/search.html")

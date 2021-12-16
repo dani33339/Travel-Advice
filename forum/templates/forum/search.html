@@ -1,11 +1,9 @@
 {% extends 'forumsbase.html' %}
-
 {% block content %}
-
     <div class="container">
         <!--Navigation-->
         <div class="navigate">
-            <span><a href="{% url 'forumhome' %}">TravelAdvice - Forums</a> >> <a href="{{forum.get_url}}">{{forum.title}}</a></span>
+            <span>Search: {{query}} --> {{objects|length}} Result(s) Found</span>
         </div>
         <!--Display posts table-->
         <div class="posts-table">
@@ -16,35 +14,42 @@
                 <div class="last-reply">Last Reply</div>
             </div>
 
-                {% for post in posts %}
+            {% for post in objects %}
             <div class="table-row">
                 <div class="status"><i class="fa fa-fire"></i></div>
                 <div class="subjects">
-                        <a href="{{post.get_url}}">{{post.title}}</a>
+                    <a href="{{post.get_url}}">{{post.title}}</a>
                     <br>
                     <span>Started by <b><a href="">{{post.user.fullname|title}}</a></b> .</span>
                 </div>
                 <div class="replies">
-                   {{post.num_comments}} comments <br>
+                    {{post.num_comments}} comments <br>
                 </div>
 
+                {% if post.last_reply %}
                 <div class="last-reply">
                     {{post.last_reply.date|date}}
                     <br>By <b><a href="">{{post.last_reply.user.fullname|title}}</a></b>
                 </div>
+                {% else %}
+                <div class="last-reply">
+                    {{post.date|date}}
+                    <br>By <b><a href="">{{post.user.fullname|title}}</a></b>
+                </div>
+                {% endif %}
             </div>
             {% endfor %}
 
-
-
+            
+            
         </div>
         <!--Pagination starts-->
+            {% if objects.is_paginated %}
             <div class="pagination">
-                    pages: {% for num_page in posts.paginator.page_range %} <a href="?page={{num_page}}">{{num_page}}</a> {% endfor %}
+                pages: {% for num_page in posts.paginator.page_range %} <a href="?page={{num_page}}">{{num_page}}</a> {% endfor %}
             </div>
+            {% endif %}
         <!--pagination ends-->
     </div>
 
-
-
-   {% endblock content %}
+    {% endblock content %}
