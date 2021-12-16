@@ -19,8 +19,3 @@ function showComment(){
     commentArea.classList.remove("hide");
 }
 
-//Reply
-function showReply(id){
-    var replyArea = document.getElementById(id);
-    replyArea.classList.remove("hide");
-}
