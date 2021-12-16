@@ -16,6 +16,7 @@
           <li class="header__menuItem"><a href="{% url 'trips' %}">Home</a></li>
           <li class="header__menuItem"><a href="{% url 'forumhome' %}">Forum</a></li>
           <li class="header__menuItem"><a href="{% url 'profiles' %}">Guides</a></li>
+          <li class="header__menuItem"><a href="{% url 'contact' %}">Contact Us</a></li>
           {% if user.is_authenticated %}
           <li class="header__menuItem"><a href="{% url 'create-trip' %}">Add Trip</a></li>
           <li class="header__menuItem"><a href="account.html">My Account</a></li>
