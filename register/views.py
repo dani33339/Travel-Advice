@@ -15,10 +15,8 @@ def signup(request):
     if request.method == "POST":
         if form.is_valid():
             new_user=form.save()
-
             group = Group.objects.get(name='traveler')
             new_user.groups.add(group)
-
             login(request,new_user)
             return redirect("update_profile")
     context.update({
