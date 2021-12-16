@@ -22,6 +22,21 @@
         <a href="{% url 'create_post' %}" style="margin:auto; text-align:center; display:block;font-size: 35px" ><button>Create New Post</button></a>
         {% endif %}
     </header>
+     <!--SearchBox Section-->
+                <form action="" role="form" method="GET">
+                <div class="search-box">
+                    <div>
+                        <select name="search-box" id="">
+                            <option value="Everything">Everything</option>
+                            <option value="Titles">Titles</option>
+                            <option value="Descriptions">Descriptions</option>
+                        </select>
+                        <input type="text" name="q" placeholder="search in the forum ...">
+                        <button type="submit" name="search"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                </form>
+
     {% block content %}
     {% endblock content %}
 
