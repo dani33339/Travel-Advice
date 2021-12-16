@@ -17,7 +17,10 @@
 <body>
     <header>
        {% include 'navbar.html' %}
-
+        {% if user.is_authenticated %}
+        <a></a>
+        <a href="{% url 'create_post' %}" style="margin:auto; text-align:center; display:block;font-size: 35px" ><button>Create New Post</button></a>
+        {% endif %}
     </header>
     {% block content %}
     {% endblock content %}
