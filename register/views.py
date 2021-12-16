@@ -6,7 +6,7 @@ from register.forms import UpdateForm
 from django.contrib.auth import logout as lt
 from users.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
-
+from forum.models import Author
 
 @unauthenticated_user
 def signup(request):
@@ -51,6 +51,8 @@ def update_profile(request):
     if request.method=="POST":
         if form.is_valid():
             update_profile=form.save(commit=False)
+            author = Author.objects.get(user=request.user)
+            author.delete()
             update_profile.user=user
             update_profile.save()
             return redirect("trips")
