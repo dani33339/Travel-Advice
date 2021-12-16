@@ -19,6 +19,9 @@ pip install django-crispy-forms
 
 after the installation of the pip's you need to write the following command in your terminal :
 
+pip install whitenoise
+-With a couple of lines of config WhiteNoise allows your web app to serve its own static files
+
 python manage.py runserver
 
 after that the website will be online on : http://127.0.0.1:8000/
