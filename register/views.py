@@ -4,7 +4,10 @@ from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
 from register.forms import UpdateForm
 from django.contrib.auth import logout as lt
+from users.decorators import unauthenticated_user, allowed_users
 
+
+@unauthenticated_user
 def signup(request):
     context={}
     form = UserCreationForm(request.POST or None)
@@ -19,6 +22,7 @@ def signup(request):
     })
     return render(request,"register/signup.html",context)
 
+@unauthenticated_user
 def signin(request):
     context = {}
     form = AuthenticationForm(request,data=request.POST)
