@@ -81,7 +81,7 @@ def create_post(request):
     return render(request, "forum/create_post.html", context)
 
 def latest_posts(request):
-    posts = Post.objects.all().filter(approved=True)[:10]
+    posts = Post.objects.all()[:10]
     context = {
         "posts":posts,
         "title": "latest-posts",
