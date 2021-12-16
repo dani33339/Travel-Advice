@@ -75,9 +75,10 @@ class Post(models.Model):
     slug = models.SlugField(max_length=400, unique=True, blank=True)
     user = models.ForeignKey(Author, on_delete=models.CASCADE) #frame key of the author
     content = HTMLField()
-    categories = models.ManyToManyField(Category)
+    categories = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    #categories = models.ManyToManyField(Category)
     date = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(default=True)
     tags = TaggableManager() #imported from taggit.managers
     comments = models.ManyToManyField(Comment, blank=True)
 
