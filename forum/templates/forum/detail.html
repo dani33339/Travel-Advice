@@ -28,21 +28,16 @@
                     {{post.content|safe}}
                     <br>
                     <div class="comment">
-                        <button onclick="showComment()">Comment</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!--Comment Area-->
-        <div class="comment-area hide" id="comment-area">
-            <textarea name="comment" id="" placeholder="comment here ... "></textarea>
-            <input type="submit" value="submit">
-        </div>
+
 
         <!--Comments Section-->
 
-{% for comment in post.comments.all %}
+        {% for comment in post.comments.all %}
         <div class="comments-container">
             <div class="body">
                 <div class="authors">
@@ -55,33 +50,31 @@
                 <div class="content">
                     {{comment.content}}
                     <br>
-
                 </div>
             </div>
         </div>
 
-        <!--Reply section-->
-        {% for reply in comment.replies.all %}
-        <div class="comments-container" style="width: 95%; margin-left:5%;">
-            <div class="body">
-                <div class="authors">
-                    <div class="username"><a href="">{{reply.user.fullname|title}}</a></div>
-                    <div>Role</div>
-                    <img src="{{reply.user.profile_pic.url}}" alt="">
-                    <div>Posts: <u>{{reply.user.num_posts}}</u></div>
-                    <div>Points: <u>{{reply.user.points}}</u></div>
-                </div>
-                <div class="content">
-                    {{reply.content}}
-                    <br>
-                </div>
+
+        {% endfor %}
+
+        <!--Comment Area-->
+        {% if post.closed == True %}
+        <div style="background-color:#fff;color:#000;font-weight:bolder;padding:20px;width:100%;"> This Topic Is Closed! </div>
+        {% else %}
+        {% if request.user.is_authenticated %}
+        <form action="." method="post">
+            {% csrf_token %}
+            <div class="comment-area " id="comment-area">
+                <textarea name="comment" id="" placeholder="comment here ... "></textarea>
+                <input type="submit" value="submit" name="comment-form">
             </div>
-        </div>
-        {% endfor %}
+        </form>
+        {% else %}
+<div style="background-color:#fff;color:#000;font-weight:bolder;padding:20px;width:100%;"> You need to <a href="{% url 'signin' %}"><b>login</b></a> to comment.! </div>
 
-        {% endfor %}
+        {% endif %}
 
-        
+        {% endif %}
 
     </div>
      {% endblock content %}
