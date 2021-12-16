@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from register.forms import UpdateForm
 from django.contrib.auth import logout as lt
 from users.decorators import unauthenticated_user, allowed_users
+from django.contrib.auth.models import Group
 
 
 @unauthenticated_user
@@ -14,6 +15,10 @@ def signup(request):
     if request.method == "POST":
         if form.is_valid():
             new_user=form.save()
+
+            group = Group.objects.get(name='traveler')
+            new_user.groups.add(group)
+
             login(request,new_user)
             return redirect("update_profile")
     context.update({
