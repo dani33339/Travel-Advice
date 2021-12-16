@@ -88,3 +88,7 @@ def latest_posts(request):
     }
 
     return render(request, "forum/latest-posts.html", context)
+
+def search_result(request):
+
+    return render(request, "forum/search.html")
