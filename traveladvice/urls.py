@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from contact import views as contact_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -11,6 +12,7 @@ urlpatterns = [
     path('users/', include("users.urls")),
     path('tinymce/', include('tinymce.urls')),
     path('account/', include('register.urls')),
+    path('contact/',contact_views.contact_view,name='contact')
 
 ]
 
