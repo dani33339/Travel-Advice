@@ -4,13 +4,21 @@ from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
 from register.forms import UpdateForm
 from django.contrib.auth import logout as lt
+from users.decorators import unauthenticated_user, allowed_users
+from django.contrib.auth.models import Group
 
+
+@unauthenticated_user
 def signup(request):
     context={}
     form = UserCreationForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
             new_user=form.save()
+
+            group = Group.objects.get(name='traveler')
+            new_user.groups.add(group)
+
             login(request,new_user)
             return redirect("update_profile")
     context.update({
@@ -19,6 +27,7 @@ def signup(request):
     })
     return render(request,"register/signup.html",context)
 
+@unauthenticated_user
 def signin(request):
     context = {}
     form = AuthenticationForm(request,data=request.POST)
