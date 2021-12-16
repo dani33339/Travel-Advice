@@ -1,6 +1,9 @@
 {% extends 'forumsbase.html' %}
 
+
 {% block content %}
+
+    <a href="{% url 'create_post' %}" text-align="center" margin="0">Post Something!</a>
 
     <div class="container">
         <div class="subforum">
@@ -27,6 +30,7 @@
                     </div>
 
                 {% endfor %}
+
 
         </div>
         <!--More-->
