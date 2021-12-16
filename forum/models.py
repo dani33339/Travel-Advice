@@ -76,9 +76,7 @@ class Post(models.Model):
     user = models.ForeignKey(Author, on_delete=models.CASCADE) #frame key of the author
     content = HTMLField()
     categories = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    #categories = models.ManyToManyField(Category)
     date = models.DateTimeField(auto_now_add=True)
-    approved = models.BooleanField(default=True)
     tags = TaggableManager() #imported from taggit.managers
     comments = models.ManyToManyField(Comment, blank=True)
 
