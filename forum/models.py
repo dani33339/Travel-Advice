@@ -79,6 +79,7 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     tags = TaggableManager() #imported from taggit.managers
     comments = models.ManyToManyField(Comment, blank=True)
+    closed = models.BooleanField(default=False)
 
 #save button
     def save(self, *args, **kwargs):
