@@ -60,23 +60,12 @@ class Category(models.Model):
     def last_post(self):
         return Post.objects.filter(categories=self).latest("date")
 
-class Reply(models.Model):
-    user = models.ForeignKey(Author, on_delete=models.CASCADE)
-    content = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.content[:100]
-
-    class Meta:
-        verbose_name_plural = "replies"
 
 #create sub forums
 class Comment(models.Model):
     user = models.ForeignKey(Author, on_delete=models.CASCADE)
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    replies = models.ManyToManyField(Reply, blank=True)
 
     def __str__(self):
         return self.content[:100]

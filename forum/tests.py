@@ -1,6 +1,6 @@
 from django.test import TestCase,Client
 from django.contrib.auth import get_user_model
-from .models import Category, Author, Post, Comment, Reply
+from .models import Category, Author, Post, Comment
 
 User = get_user_model()
 
@@ -40,20 +40,6 @@ class main_Test_Cases(TestCase):
       self.assertTemplateUsed(response, 'forum/forums.html') #checks that the template with the given name was used in rendering the response
       self.assertContains(response, 'testcategory') #test if testcategory text appers on the page
 
-
-   def test_Reply(self):
-      """tests for replies"""
-      test_user = User.objects.create_user(username="user", email="email@mail.com", password="123456") #create a user
-      author1 = Author.objects.create(user=test_user, fullname="test1",slug="user1", bio="just for test")#create an author
-      self.assertEqual(Reply.objects.all().count(), 0)#count replies in the db should be 0
-      reply1 = Reply.objects.create(user=author1 , content = "just a test") #create a replay
-      self.assertEqual(Reply.objects.all().count(), 1)#count replies in the db should be 1
-      self.assertEqual(Reply.objects.filter(content="just a test").count(), 1)#count replies with the content "just a test" should be 1
-      reply2 = Reply.objects.create(user=author1 , content = "just a test2") #create a replay
-      self.assertEqual(Reply.objects.all().count(), 2)#count replies in the db should be 2
-      reply1.delete() #delete the reply
-      self.assertEqual(Reply.objects.all().count(), 1)#count replies in the db should be 1
-      self.assertEqual(Reply.objects.filter(content="just a test").count(), 0)#count replies with the content "just a test" should be 0
 
    def test_Comment(self):
       """tests for comments"""

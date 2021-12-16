@@ -1,11 +1,10 @@
 {% extends 'forumsbase.html' %}
 
 {% block content %}
-
     <div class="container">
         <!--Navigation-->
         <div class="navigate">
-            <span><a href="{% url 'forumhome' %}">TravelAdvice - Forums</a> >> <a href="{{forum.get_url}}">{{forum.title}}</a></span>
+            <span>Latest 10 Posts</span>
         </div>
         <!--Display posts table-->
         <div class="posts-table">
@@ -16,16 +15,16 @@
                 <div class="last-reply">Last Reply</div>
             </div>
 
-                {% for post in posts %}
+            {% for post in posts %}
             <div class="table-row">
                 <div class="status"><i class="fa fa-fire"></i></div>
                 <div class="subjects">
-                        <a href="{{post.get_url}}">{{post.title}}</a>
+                    <a href="{{post.get_url}}">{{post.title}}</a>
                     <br>
                     <span>Started by <b><a href="">{{post.user.fullname|title}}</a></b> .</span>
                 </div>
                 <div class="replies">
-                   {{post.num_comments}} comments <br>
+                    {{post.num_comments}} comments <br>
                 </div>
 
                 <div class="last-reply">
@@ -36,15 +35,6 @@
             {% endfor %}
 
 
-
         </div>
-        <!--Pagination starts-->
-            <div class="pagination">
-                    pages: {% for num_page in posts.paginator.page_range %} <a href="?page={{num_page}}">{{num_page}}</a> {% endfor %}
-            </div>
-        <!--pagination ends-->
-    </div>
 
-
-
-   {% endblock content %}
+    {% endblock content %}
