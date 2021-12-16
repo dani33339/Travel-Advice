@@ -3,6 +3,7 @@ from .models import Author, Category, Post, Comment
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def forumhome(request):
     forums = Category.objects.all()
@@ -36,16 +37,27 @@ def detail(request, slug):
 
     context = {
         "post":post,
+        "title": post.title,
     }
     return render(request,'forum/detail.html', context)
 
 def posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
     posts = Post.objects.filter(approved=True, categories=category)
-
+    #display the posts in pages
+    paginator = Paginator(posts, 5)
+    page = request.GET.get("page")
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
     context = {
         "posts":posts,
         "forum": category,
+        "title": "Posts"
+
     }
 
     return render(request, 'forum/posts.html', context)
