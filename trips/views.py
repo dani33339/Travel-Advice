@@ -47,3 +47,4 @@ def deleteTrip(request,pk):
         return redirect('trips')
     context = {'trip':trip}
     return render(request, 'trips/delete_template.html',context)
+
