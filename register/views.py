@@ -7,6 +7,7 @@ from django.contrib.auth import logout as lt
 from users.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from forum.models import Author
+from users.models import Profile
 
 @unauthenticated_user
 def signup(request):
@@ -19,6 +20,9 @@ def signup(request):
             if Guide_CheckBox:
                 group = Group.objects.get(name='guide')
                 new_user.groups.add(group)
+                Profile.objects.create(
+                    user=new_user,
+                )
             else:
                 group = Group.objects.get(name='traveler')
                 new_user.groups.add(group)
@@ -62,6 +66,8 @@ def update_profile(request):
             else:
                 update_profile.user=user
                 update_profile.save()
+                if user.groups.filter(name="guide"):
+                     return redirect("edit-account")
                 return redirect("trips")
     context.update({
         "form": form,
