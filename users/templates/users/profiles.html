@@ -27,35 +27,32 @@
     <section class="devlist">
       <div class="container">
         <div class="grid grid--three">
+                   
+          {% for profile in profiles %}
+                <div class="column card">
+                    <div class="dev">
+                        <a href="{% url 'guide-profile' profile.id %}" class="card__body">
+                            <div class="dev__profile">
+                                <img class="avatar avatar--md" src="{{ profile.profile_image.url }}" alt="image" />
+                                <div class="dev__meta">
+                                    <h3>{{profile.name}}</h3>
+                                    <h5>{{profile.short_intro|slice:"60"}}</h5>
+                                </div>
+                            </div>
+                            <p class="dev__info">{{profile.bio|slice:"150"}}</p>
+                            <div class="dev__skills">
 
-            {% for profile in profiles %}
-            {% if not profile.user.is_staff %}
+                                {% for skill in profile.skill_set.all|slice:"5" %}
+                                <span class="tag tag--pill tag--main">
+                                    <small>{{skill}}</small>
+                                </span>
+                                {% endfor %}
 
-          <div class="column card">
-            <div class="dev">
-              <a href="{% url 'guide-profile' profile.id %}" class="card__body">
-                <div class="dev__profile">
-                  <img class="avatar avatar--md" src="{{ profile.profile_image.url }}" 
-                  alt="image" />
-                  <div class="dev__meta">
-                    <h3>{{ profile.name }}</h3>
-                    <h5>{{ profile.short_intro|slice:"60"}}</h5>
-                  </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <p class="dev__info">{{ profile.bio|slice:"150" }}</p>
-                <div class="dev__skills">
-                  {% for skill in profile.skill_set.all|slice:"5" %}
-                  <span class="tag tag--pill tag--main">
-                    <small>{{skill}}</small>
-                    {% endfor %}
-
-                </div>
-              </a>
-            </div>
-          </div>
-          {% endif %}
-          {% endfor %}
-          
+                {% endfor %}
                 
          
         </div>
