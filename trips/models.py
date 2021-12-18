@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 import uuid
 from users.models import Profile
@@ -18,18 +19,40 @@ class Trip(models.Model):
     
     def __str__(self): 
         return self.title
+    class Meta: 
+        ordering = ['-vote_ration','-vote_total', 'title']
+        
+    @property   
+    def reviewers(self):
+        queryset = self.review_set.all().values_list('owner__id', flat=True)
+        return queryset
+    
+    def getVoteCount(self): 
+        review = self.review_set.all()
+        upVotes = review.filter(value='up').count()
+        totalVotes = review.count()
+
+        ration = (upVotes/totalVotes)*100
+        self.vote_total = totalVotes
+        self.vote_ration = ration
+        self.save()
+
 
 class Review(models.Model): 
     VOTE_TYPE = ( 
         ('up', 'Up Vote'),
         ('down', 'Down Vote'),
     )
-    #owner =
+    owner =models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
     body = models.TextField(null=True, blank=True)
     value = models.CharField(max_length=200, choices= VOTE_TYPE)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True,editable=False)
+
+    # its make possible to lave only one review
+    class Meta: 
+        unique_together = [['owner', 'trip']]
 
     def __str__(self): 
         return self.value
