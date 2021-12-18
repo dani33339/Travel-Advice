@@ -26,6 +26,10 @@ class Author(models.Model):
             self.slug = slugify(self.fullname)
         super(Author, self).save(*args, **kwargs)
 
+    @property
+    def num_posts(self):
+        return Post.objects.filter(user=self).count()
+
 class Category(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=400, unique=True, blank=True)
