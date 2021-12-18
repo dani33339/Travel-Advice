@@ -12,7 +12,8 @@
                 {% for forum in forums %}
                     <div class="subforum-row">
                         <div class="subforum-icon subforum-column center">
-                            <i class="fa fa-tree"></i>
+                            <img src="{{ forum.category_image.url }}"
+                  alt="image" />
                         </div>
                         <div class="subforum-description subforum-column">
                             <h4><a href="{{forum.get_url}}">{{forum.title}}</a></h4>
