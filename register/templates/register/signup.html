@@ -7,8 +7,13 @@
  <form method="POST" action="." style="margin-left:150px;">
      {% csrf_token %}
      {{form|crispy}}
+    <div>
+        <br/>
+        <input type="checkbox" value="Accept_Guide" id="Guide_box" name="Guide_CheckBox"> I am a guide
+    </div>
      <input type="submit" value="Signup" style="margin-block:50px;">
  </form>
+
 
 {% endblock content %}
 
