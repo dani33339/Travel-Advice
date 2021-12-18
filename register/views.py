@@ -51,11 +51,13 @@ def update_profile(request):
     if request.method=="POST":
         if form.is_valid():
             update_profile=form.save(commit=False)
-            author = Author.objects.get(user=request.user)
-            author.delete()
-            update_profile.user=user
-            update_profile.save()
-            return redirect("trips")
+            author = Author.objects.filter(user=request.user)
+            if author:
+                author.delete()
+            else:
+                update_profile.user=user
+                update_profile.save()
+                return redirect("trips")
     context.update({
         "form": form,
         "title": "Update",
