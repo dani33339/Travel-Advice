@@ -37,7 +37,7 @@
                 <img class="project__thumbnail" src="{{ trip.featured_image.url }}" alt="project thumbnail" />
                 <div class="card__body">
                   <h3 class="project__title">{{trip.title}}</h3>
-                  <p><a class="project__author" href="profile.html">By Dennis Ivanov</a></p>
+                  <p><a class="project__author" href="{% url  'guide-profile' trip.owner.id %}">By {{trip.owner.name}}</a></p>
                   <p class="project--rating">
                     <span style="font-weight: bold;">{{trip.vote_ration}}%</span> Positive
                     Feedback ({{trip.vote_total}}) Vote{{trip.vote_total|pluralize:"s"}}
