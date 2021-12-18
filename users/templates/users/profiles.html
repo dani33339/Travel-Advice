@@ -29,6 +29,7 @@
         <div class="grid grid--three">
                    
           {% for profile in profiles %}
+            {%if not profile.user.is_staff %}
                 <div class="column card">
                     <div class="dev">
                         <a href="{% url 'guide-profile' profile.id %}" class="card__body">
@@ -52,8 +53,9 @@
                         </a>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
-                
+
          
         </div>
       </div>

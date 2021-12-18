@@ -20,6 +20,7 @@
           <li class="header__menuItem"><a >Hello Guest </a></li>
           {%endif%}
           <li class="header__menuItem"><a href="{% url 'trips' %}">Home</a></li>
+          <li class="header__menuItem"><a href="{% url 'contact' %}">Contact Us</a></li>
           <li class="header__menuItem"><a href="{% url 'forumhome' %}">Forum</a></li>
           <li class="header__menuItem"><a href="{% url 'profiles' %}">Guides</a></li>
           {% if user.is_authenticated %}
