@@ -16,15 +16,11 @@
           <li class="header__menuItem"><a href="{% url 'trips' %}">Home</a></li>
           <li class="header__menuItem"><a href="{% url 'forumhome' %}">Forum</a></li>
           <li class="header__menuItem"><a href="{% url 'profiles' %}">Guides</a></li>
-          <li class="header__menuItem"><a href="{% url 'contact' %}">Contact Us</a></li>
           {% if user.is_authenticated %}
-          {% if user.is_staff %}
-          <li class="header__menuItem"><a href="{% url 'create-trip' %}">Add Trip</a></li>
-          {% endif %}
-          <li class="header__menuItem"><a href="account.html">My Account</a></li>
+          <li class="header__menuItem"><a href="{% url 'account' %}">My Account</a></li>
           <li class="header__menuItem"><a href="{% url 'update_profile' %}">Update Profile</a></li>
           <li class="header__menuItem"><a href="{% url 'logout' %}">Logout</a></li>
-          {% else %}  
+          {% else %}
           <li class="header__menuItem"><a href="{% url 'signin' %}" class="btn btn--sub">Login</a></li>
           <li class="header__menuItem"><a href="{% url 'signup' %}" class="btn btn--sub">Signup</a></li>
           {% endif %}
@@ -32,12 +28,3 @@
       </nav>
     </div>
   </header>
-
-
-
-
-
-                
-
-
-<!-- <li class="header__menuItem"><a href="login.html" class="btn btn--sub">Login/Sign Up</a></li> -->
