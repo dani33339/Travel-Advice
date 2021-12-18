@@ -31,6 +31,8 @@ class Category(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=400, unique=True, blank=True)
     description = models.TextField(default="description")
+    category_image = models.ImageField(
+        null=True, blank=True, upload_to='flags/', default= "flags/flag-default.png")
 
 #Meta is basically the inner class of your model class.
     class Meta:
