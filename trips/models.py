@@ -43,7 +43,7 @@ class Review(models.Model):
         ('up', 'Up Vote'),
         ('down', 'Down Vote'),
     )
-    owner =models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
     body = models.TextField(null=True, blank=True)
     value = models.CharField(max_length=200, choices= VOTE_TYPE)
