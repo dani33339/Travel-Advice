@@ -19,12 +19,12 @@ class main_Test_Cases(TestCase):
       profile2 = Profile.objects.create(user=test_user2, name="test2", email="email@mail.com", username="test_user2", location="there", short_intro="hi", bio="test profile2") #create a Profile
       self.assertEqual(Profile.objects.all().count(), 2) #count profiles in the db should be 2
       self.assertEqual(Profile.objects.filter(name="test1").count(), 1) #count profiles with the name test1 should be 1
-      profile1.delete() #delete the profiles
+      profile1.delete() #delete the profile
       self.assertEqual(Profile.objects.filter(name="test1").count(), 0) #count profiles with the name test1 should be 0
       self.assertEqual(Profile.objects.all().count(), 1) #count profiles in the db should be 0
 
       #test if the profile2 has its own page
-      #response = self.client.get('/users/profile/<str:pk>/')#get the address of this post page
+      #response = self.client.get('/users/profile/profile.id/')#get the address of this post page
       #self.assertEqual(response.status_code, 200)#check if the page exits or there is an error
       #self.assertTemplateUsed(response, 'users/guide-profile.html')#checks that the template with the given name was used in rendering the response
       #self.assertContains(response, 'test profile2')#test if test post content appers on the page
