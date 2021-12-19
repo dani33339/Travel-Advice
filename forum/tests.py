@@ -63,14 +63,10 @@ class main_Test_Cases(TestCase):
       self.assertEqual(Post.objects.all().count(), 0)#count posts in the db should be 0
       post1 = Post.objects.create(title="test post", slug="testpost", user=author1,
       content= "just post for a test", categories=category1, tags="test") #create a post
-     # post1.categories.add(category1)#add a category to the post
-      post1.save() #save the post with the new category
       self.assertEqual(Post.objects.all().count(), 1)#count posts in the db should be 1
       self.assertEqual(Post.objects.filter(title="test post").count(), 1)#count posts with the title "test post" should be 1
       post2 = Post.objects.create(title="test post2", slug="testpost2", user=author1,
       content="just post for a test2", categories=category1, tags="test")  # create a post
-      #post2.categories.add(category1)  # add a category to the post
-      post2.save()  # save the post with the new category
       self.assertEqual(Post.objects.all().count(), 2)#count posts in the db should be 2
       post2.delete() #delete the post
       self.assertEqual(Post.objects.all().count(), 1)#count posts in the db should be 1
