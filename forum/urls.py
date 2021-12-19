@@ -3,7 +3,7 @@ from .views import (
     forumhome, detail, posts, create_post, latest_posts, search_result)
 
 urlpatterns = [
-    path("forumhome/", forumhome, name="forumhome"),
+    path('', forumhome, name="forumhome"),
     path("detail/<slug>/", detail, name="detail"),
     path("posts/<slug>/", posts, name="posts"),
     path("create_post", create_post, name="create_post"),

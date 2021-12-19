@@ -35,7 +35,7 @@ class main_Test_Cases(TestCase):
       self.assertEqual(Category.objects.all().count(), 1) #count authors in the db should be 0
 
       #test if the category appers in the forum page of the forum
-      response = self.client.get('/') #get the address of home page
+      response = self.client.get('/forum/') #get the address of home page
       self.assertEqual(response.status_code, 200) #check if the page exits or there is an error
       self.assertTemplateUsed(response, 'forum/forums.html') #checks that the template with the given name was used in rendering the response
       self.assertContains(response, 'testcategory') #test if testcategory text appers on the page
@@ -62,14 +62,14 @@ class main_Test_Cases(TestCase):
       category1 = Category.objects.create(title="testcategory", slug="testcategory", description="just a test") #create an category
       self.assertEqual(Post.objects.all().count(), 0)#count posts in the db should be 0
       post1 = Post.objects.create(title="test post", slug="testpost", user=author1,
-      content= "just post for a test" , approved=True, tags="test") #create a post
-      post1.categories.add(category1)#add a category to the post
+      content= "just post for a test", categories=category1, tags="test") #create a post
+     # post1.categories.add(category1)#add a category to the post
       post1.save() #save the post with the new category
       self.assertEqual(Post.objects.all().count(), 1)#count posts in the db should be 1
       self.assertEqual(Post.objects.filter(title="test post").count(), 1)#count posts with the title "test post" should be 1
       post2 = Post.objects.create(title="test post2", slug="testpost2", user=author1,
-      content="just post for a test2", approved=True, tags="test")  # create a post
-      post2.categories.add(category1)  # add a category to the post
+      content="just post for a test2", categories=category1, tags="test")  # create a post
+      #post2.categories.add(category1)  # add a category to the post
       post2.save()  # save the post with the new category
       self.assertEqual(Post.objects.all().count(), 2)#count posts in the db should be 2
       post2.delete() #delete the post
@@ -78,13 +78,13 @@ class main_Test_Cases(TestCase):
 
 
       #test if the post appers in the category page
-      response = self.client.get('/posts/testcategory/')#get the address of this category page
+      response = self.client.get('/forum/posts/testcategory/')#get the address of this category page
       self.assertEqual(response.status_code, 200)#check if the page exits or there is an error
       self.assertTemplateUsed(response, 'forum/posts.html')#checks that the template with the given name was used in rendering the response
       self.assertContains(response, 'test post')#test if test post text appers on the page
 
       #test if the post has its own page
-      response = self.client.get('/detail/testpost/')#get the address of this post page
-      self.assertEqual(response.status_code, 200)#heck if the page exits or there is an error
+      response = self.client.get('/forum/detail/testpost/')#get the address of this post page
+      self.assertEqual(response.status_code, 200)#check if the page exits or there is an error
       self.assertTemplateUsed(response, 'forum/detail.html')#checks that the template with the given name was used in rendering the response
       self.assertContains(response, 'just post for a test')#test if test post content appers on the page
