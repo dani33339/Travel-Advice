@@ -7,6 +7,7 @@ from django_resized import ResizedImageField
 from tinymce.models import HTMLField
 from taggit.managers import TaggableManager
 from django.shortcuts import reverse
+from django.contrib.auth.models import Group
 
 User = get_user_model() #ready model for user imported from django.contrib.auth
 
@@ -26,9 +27,21 @@ class Author(models.Model):
             self.slug = slugify(self.fullname)
         super(Author, self).save(*args, **kwargs)
 
+    # return number of posts
     @property
     def num_posts(self):
         return Post.objects.filter(user=self).count()
+
+    # return user group
+    @property
+    def user_name(self):
+        return self.user
+
+    #return user group
+    @property
+    def user_group(self):
+        return (self.user).groups.all()[0].name
+
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
@@ -108,3 +121,7 @@ class Post(models.Model):
     @property
     def last_reply(self):
         return self.comments.latest("date")
+
+    @property
+    def user_name(self):
+        return self.user.username()
