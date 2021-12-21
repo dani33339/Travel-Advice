@@ -4,14 +4,13 @@ from django.http import HttpResponse
 from .models import Review, Trip
 from .forms import TripForm, ReviewForm
 from django.contrib import messages
-
+from .utils import searchTrips
 
 
 def trips(request): 
-    trips = Trip.objects.all()
-    context = {'trips': trips}
+    trips, search_query = searchTrips(request)
+    context = {'trips': trips, 'search_query': search_query}
     return render(request, 'trips/trips.html',context)
-
 
 
 def trip(request,pk): 

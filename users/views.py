@@ -3,12 +3,14 @@ from django.shortcuts import redirect, render
 from.models import Profile
 from .forms import ProfileForm,SkillForm
 from django.contrib import messages
+from .utils import searchProfiles
 
 
 def profiles(request): 
     """ main page of the all guides """
-    profiles = Profile.objects.all()
-    context = {'profiles': profiles}
+    profiles, search_query = searchProfiles(request)
+    #profiles = Profile.objects.all()
+    context = {'profiles': profiles, 'search_query': search_query}
     return render(request, 'users/profiles.html', context)
 
 def guideProfile(request,pk): 
