@@ -13,11 +13,11 @@
         </div>
 
         <div class="hero-section__search">
-          <form class="form" action="#" method="get">
+          <form id='searchForm' class="form" action="{% url 'trips' %}" method="get">
             <div class="form__field">
               <label for="formInput#search">Search By Trip </label>
-              <input class="input input--text" id="formInput#search" type="text" name="text"
-                placeholder="Search by Trip Title" />
+              <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                  placeholder="Search by Trip Title"  value="{{search_query}}"/>
             </div>
 
             <input class="btn btn--sub btn--lg" type="submit" value="Search" />
