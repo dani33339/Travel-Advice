@@ -13,8 +13,12 @@
               <h2 class="dev__name">{{profile.name}}</h2>
               <p class="dev__title">{{profile.short_intro}}</p>
               <p class="dev__location">Based in {{profile.location}}</p>
-              
-              <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+              {%if user.is_authenticated %}
+              <a href="mailto:{{profile.email}}" class="btn btn--sub btn--lg">Send Message </a>
+              {% else %}
+              <a href="{% url 'signin' %}?next={{request.path}}">Please login to send message</a>
+              {% endif %}
+
             </div>
           </div>
         </div>
