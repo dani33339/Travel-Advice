@@ -25,6 +25,7 @@ def signup(request):
                 new_user.groups.add(group)
             Profile.objects.create(
                 user=new_user,
+                username=new_user.username,
             )
             login(request,new_user)
             return redirect("update_profile")
