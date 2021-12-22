@@ -58,6 +58,8 @@ def update_profile(request):
     context = {}
     user = request.user
     form = UpdateForm(request.POST)
+    if Author.objects.filter(user=user):
+        form = UpdateForm(instance = Author.objects.get(user=user))
     if request.method=="POST":
         if form.is_valid():
             update_profile=form.save(commit=False)
