@@ -24,9 +24,7 @@
           <li class="header__menuItem"><a href="{% url 'forumhome' %}">Forum</a></li>
           <li class="header__menuItem"><a href="{% url 'profiles' %}">Guides</a></li>
           {% if user.is_authenticated %}
-          {% if user.groups.all.0.name == "guide" or user.groups.all.0.name == "admin" %}
           <li class="header__menuItem"><a href="{% url 'account' %}">My Account</a></li>
-          {% endif %}
           <li class="header__menuItem"><a href="{% url 'update_profile' %}">Update Profile</a></li>
           <li class="header__menuItem"><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
