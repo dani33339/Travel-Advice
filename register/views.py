@@ -58,17 +58,14 @@ def update_profile(request):
     context = {}
     user = request.user
     form = UpdateForm(request.POST)
-    if Author.objects.filter(user=user):
-        form = UpdateForm(instance = Author.objects.get(user=user))
     if request.method=="POST":
         if form.is_valid():
             update_profile=form.save(commit=False)
             author = Author.objects.filter(user=request.user)
-            if author:
+            if(author):
                 author.delete()
-            else:
-                update_profile.user=user
-                update_profile.save()
+            update_profile.user=user
+            update_profile.save()
             return redirect("edit-account")
     context.update({
         "form": form,
