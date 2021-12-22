@@ -29,7 +29,9 @@
         <div class="grid grid--three">
                    
           {% for profile in profiles %}
-            {%if not profile.user.is_staff %}
+            {%if not profile.user.is_staff%}
+            {% ifnotequal  profile.user.groups.all.0.name "traveler" %}
+            {% if profile.admin_approved %}
                 <div class="column card">
                     <div class="dev">
                         <a href="{% url 'guide-profile' profile.id %}" class="card__body">
@@ -53,6 +55,8 @@
                         </a>
                     </div>
                 </div>
+                {% endif %}
+                {% endifnotequal %}
                 {% endif %}
                 {% endfor %}
 

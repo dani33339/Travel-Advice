@@ -20,12 +20,13 @@ def signup(request):
             if Guide_CheckBox:
                 group = Group.objects.get(name='guide')
                 new_user.groups.add(group)
-                Profile.objects.create(
-                    user=new_user,
-                )
             else:
                 group = Group.objects.get(name='traveler')
                 new_user.groups.add(group)
+            Profile.objects.create(
+                user=new_user,
+                username=new_user.username,
+            )
             login(request,new_user)
             return redirect("update_profile")
     context.update({
@@ -57,6 +58,8 @@ def update_profile(request):
     context = {}
     user = request.user
     form = UpdateForm(request.POST)
+    if Author.objects.filter(user=user):
+        form = UpdateForm(instance = Author.objects.get(user=user))
     if request.method=="POST":
         if form.is_valid():
             update_profile=form.save(commit=False)
@@ -66,9 +69,7 @@ def update_profile(request):
             else:
                 update_profile.user=user
                 update_profile.save()
-                if user.groups.filter(name="guide"):
-                     return redirect("edit-account")
-                return redirect("trips")
+            return redirect("edit-account")
     context.update({
         "form": form,
         "title": "Update",
