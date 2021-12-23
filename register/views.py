@@ -27,6 +27,10 @@ def signup(request):
                 user=new_user,
                 username=new_user.username,
             )
+            Author.objects.create(
+                user=new_user,
+                fullname=new_user.username,
+            )
             login(request,new_user)
             return redirect("update_profile")
     context.update({
@@ -55,23 +59,19 @@ def signin(request):
 
 @login_required
 def update_profile(request):
-    context = {}
     user = request.user
-    form = UpdateForm(request.POST)
+    author = Author.objects.get(user=request.user)
+    if (author):
+        form = UpdateForm(instance=author)
+    else:
+        form = UpdateForm(request.POST)
     if request.method=="POST":
+        form = UpdateForm(request.POST, request.FILES, instance=author)
         if form.is_valid():
-            update_profile=form.save(commit=False)
-            author = Author.objects.filter(user=request.user)
-            if(author):
-                author.delete()
-            update_profile.user=user
-            update_profile.save()
+            form.save()
             return redirect("edit-account")
-    context.update({
-        "form": form,
-        "title": "Update",
-    })
 
+    context={ "form": form}
     return render(request, "register/update.html", context)
 
 @login_required
