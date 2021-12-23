@@ -42,6 +42,11 @@ class Author(models.Model):
     def user_group(self):
         return (self.user).groups.all()[0].name
 
+    @property
+    def user_profile(self):
+        return self.user.profile.id
+
+
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
