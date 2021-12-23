@@ -22,7 +22,7 @@
                 <div class="subjects">
                         <a href="{{post.get_url}}">{{post.title}}</a>
                     <br>
-                    <span>Started by <b><a href="">{{post.user.fullname|title}}</a></b> .</span>
+                    <span>Started by <b><a href="{% url  'guide-profile' post.user.user_profile %}">{{post.user.user_name}}</a></b> .</span>
                 </div>
                 <div class="replies">
                    {{post.num_comments}} comments <br>
@@ -30,7 +30,7 @@
 
                 <div class="last-reply">
                     {{post.last_reply.date|date}}
-                    <br>By <b><a href="">{{post.last_reply.user.fullname|title}}</a></b>
+                    <br>By <b>{{post.last_reply.user.user_name}}</b>
                 </div>
             </div>
             {% endfor %}

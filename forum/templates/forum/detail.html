@@ -40,8 +40,9 @@
         <div class="comments-container">
             <div class="body">
                 <div class="authors">
-                    <div class="username"><a href="">{{comment.user.fullname|title}}</a></div>
-                    <div>Role</div>
+                    <div class="username"><a href="{% url  'guide-profile' comment.user.user_profile %}">{{comment.user.user_name}}</a></div>
+                    <div>Name: <u>{{comment.user.fullname|title}}</u> </div>
+                    <div>Role: <u>{{comment.user.user_group}}</u> </div>
                     <div>Posts: <u>{{comment.user.num_posts}}</u></div>
                 </div>
                 <div class="content">

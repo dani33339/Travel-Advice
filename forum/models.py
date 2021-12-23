@@ -42,12 +42,13 @@ class Author(models.Model):
     def user_group(self):
         return (self.user).groups.all()[0].name
 
+    #get user profile id
     @property
     def user_profile(self):
         return self.user.profile.id
 
 
-
+#create sub forums
 class Category(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=400, unique=True, blank=True)
@@ -84,7 +85,7 @@ class Category(models.Model):
         return Post.objects.filter(categories=self).latest("date")
 
 
-#create sub forums
+
 class Comment(models.Model):
     user = models.ForeignKey(Author, on_delete=models.CASCADE)
     content = models.TextField()
@@ -92,6 +93,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content[:100]
+
 
 class Post(models.Model):
     title = models.CharField(max_length=400)
@@ -126,7 +128,3 @@ class Post(models.Model):
     @property
     def last_reply(self):
         return self.comments.latest("date")
-
-    @property
-    def user_name(self):
-        return self.user.username()
