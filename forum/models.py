@@ -13,7 +13,7 @@ User = get_user_model() #ready model for user imported from django.contrib.auth
 
 class Author(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    fullname = models.CharField(max_length=40, blank=True)
+    fullname = models.CharField(max_length=40, blank=True,unique=True)
     slug = models.SlugField(max_length=400, unique=True, blank=True) # imported from django.utils.text
     bio = HTMLField() #desctription of the user imported the field from tinymce.models
 
@@ -96,7 +96,7 @@ class Comment(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=400)
+    title = models.CharField(max_length=400,unique=True)
     slug = models.SlugField(max_length=400, unique=True, blank=True)
     user = models.ForeignKey(Author, on_delete=models.CASCADE) #frame key of the author
     content = HTMLField()

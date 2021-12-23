@@ -10,3 +10,6 @@ def contact_view(request):
     form = ContactForm()
     context = {'form': form}
     return render(request,'contact.html',context)
+
+def aboutus(request):
+    return render(request, 'aboutus.html', {})
