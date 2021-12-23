@@ -24,7 +24,7 @@ class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ['name', 'email', 'username',
-                  'location', 'bio', 'short_intro', 'profile_image','guide_confirmation']
+                  'location', 'bio', 'short_intro', 'profile_image']
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
@@ -32,6 +32,17 @@ class ProfileForm(ModelForm):
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})
 
+class GuideForm(ModelForm):
+    class Meta:
+        model= Profile
+        fields = ['name', 'email', 'username',
+                  'location', 'bio', 'short_intro', 'profile_image', 'guide_confirmation']
+
+        def __init__(self, *args, **kwargs):
+            super(GuideForm, self).__init__(*args, **kwargs)
+
+            for name, field in self.fields.items():
+                field.widget.attrs.update({'class': 'input'})
 
 class SkillForm(ModelForm):
     class Meta:

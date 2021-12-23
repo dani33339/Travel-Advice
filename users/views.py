@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from.models import Profile
-from .forms import ProfileForm,SkillForm
+from .forms import ProfileForm,SkillForm,GuideForm
 from django.contrib import messages
 from .utils import searchProfiles
 
@@ -40,12 +40,17 @@ def userAccount(request):
 def editAccount(request): 
     """ edit the guide profile """
     profile = request.user.profile
-
-    form = ProfileForm(instance=profile)# all fileds of profile
+    if request.user.groups.filter(name="guide"):
+        form = GuideForm(instance=profile)
+    else:
+        form = ProfileForm(instance=profile)# all fileds of profile
 
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if request.user.groups.filter(name="guide"):
+            form = GuideForm(request.POST, request.FILES, instance=profile)
+        else:
+            form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
 
