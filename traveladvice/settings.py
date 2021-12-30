@@ -149,3 +149,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #user upload all the media w
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#SMTP Configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'traveladvice2022@gmail.com'
+EMAIL_HOST_PASSWORD = 'traveladvice2022'
