@@ -158,3 +158,18 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'traveladvice2022@gmail.com'
 EMAIL_HOST_PASSWORD = 'traveladvice2022'
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+CONTACT_EMAIL = 'example@gmail.com'
+ADMIN_EMAIL = ['traveladvice2022@gmail.com', ]
+
+
+# send contact
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'traveladvice2022@gmail.com'
+EMAIL_HOST_PASSWORD = 'traveladvice2022'
