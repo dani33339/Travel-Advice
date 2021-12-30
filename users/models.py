@@ -20,11 +20,27 @@ class Profile(models.Model):
     guide_confirmation = models.ImageField(
         null=True, blank=True, upload_to='profiles/')
     admin_approved=models.BooleanField(default=False)
+    vote_total = models.IntegerField(default=0, null=True, blank=True)  # all the vote that the trips has
+    vote_ration = models.IntegerField(default=0, null=True, blank=True)  # the ration betwen negative and positive
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True,editable=False)
 
     def __str__(self): 
         return str(self.username)
+
+class review(models.Model):
+    VOTE_TYPE = (
+        ('up', 'Up Vote'),
+        ('down', 'Down Vote'),
+    )
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True,related_name = "owner")
+    vote = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True,related_name = "vote")
+    body = models.TextField(null=True, blank=True)
+    value = models.CharField(max_length=200,null=True, choices= VOTE_TYPE)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True,editable=False)
+
+    def __str__(self):
+        return self.value
 
 class Skill(models.Model): 
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True,blank=True)
