@@ -8,11 +8,12 @@ from users.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.models import Group
 from forum.models import Author
 from users.models import Profile
+from users.forms import CustomUserCreationForm
 
 @unauthenticated_user
 def signup(request):
     context={}
-    form = UserCreationForm(request.POST or None)
+    form = CustomUserCreationForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
             new_user=form.save()
@@ -26,10 +27,12 @@ def signup(request):
             Profile.objects.create(
                 user=new_user,
                 username=new_user.username,
+                email=new_user.email,
+                name=new_user.first_name,
             )
             Author.objects.create(
                 user=new_user,
-                fullname=new_user.username,
+                fullname=new_user.first_name,
             )
             login(request,new_user)
             return redirect("update_profile")
