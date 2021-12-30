@@ -25,6 +25,7 @@
             <h3 class="devInfo__title">About Me</h3>
             <p class="devInfo__about">{{ profile.bio }}</p>
           </div>
+          {% ifnotequal  profile.user.groups.all.0.name "traveler" %}
           <div class="settings">
             <h3 class="settings__title">Skills</h3>
             <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-skill' %}"><i class="im im-plus"></i> Add Skill</a>
@@ -71,6 +72,7 @@
             {% endfor %}
           </table>
         </div>
+        {% endifnotequal %}
       </div>
     </div>
   </main>
