@@ -18,7 +18,9 @@
               {% else %}
               <a href="{% url 'signin' %}?next={{request.path}}">Please login to send message</a>
               {% endif %}
-
+              <h5 class="project--rating">
+              {{profile.vote_ration}}% Postitive Feedback ({{profile.vote_total}} Vote{{profile.vote_total|pluralize:"s"}})
+              </h5>
             </div>
           </div>
         </div>

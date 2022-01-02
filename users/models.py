@@ -39,6 +39,10 @@ class review(models.Model):
     value = models.CharField(max_length=200,null=True, choices= VOTE_TYPE)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True,editable=False)
 
+    class Meta:
+        unique_together = [['owner','vote']]
+
+
     def __str__(self):
         return self.value
 
