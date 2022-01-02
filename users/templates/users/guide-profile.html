@@ -78,8 +78,26 @@
               </div>
             {% endfor %}
 
-              
 
+            {% if request.user.profile.id in profile.reviewers %}
+            <p>You have already submitted your review for this trip</p>
+            {% elif request.user.profile == profile.owner %}
+            <p>You cannot review your own trip</p>
+            {% elif request.user.is_authenticated %}
+              <!-- Form to print the vote and selection-->
+            <form class="form" action="{% url 'guide-profile' profile.id %}" method="POST">
+              {% csrf_token %}
+              {% for field in form %}
+              <div class="form__field">
+                <label for="formInput#textarea">{{field.label}}</label>
+                {{ field }}
+              </div>
+              {% endfor%}
+              <input class="btn btn--sub btn--lg" type="submit" value="Comments" />
+            </form>
+            {% else %}
+            <a href="{% url 'signin' %}?next={{request.path}}">Please login to leave a review</a>
+            {% endif %}
              
             </div>
           </div>

@@ -28,7 +28,22 @@ class Profile(models.Model):
     def __str__(self): 
         return str(self.username)
 
-class review(models.Model):
+    @property
+    def reviewers(self):
+        queryset = self.review_set.all().values_list('owner__id', flat=True)
+        return queryset
+
+    def getVoteCount(self):
+        review = self.review_set.all()
+        upVotes = review.filter(value='up').count()
+        totalVotes = review.count() +2
+
+        ration = (upVotes / totalVotes) * 100
+        self.vote_total = totalVotes
+        self.vote_ration = ration
+        self.save()
+
+class Review(models.Model):
     VOTE_TYPE = (
         ('up', 'Up Vote'),
         ('down', 'Down Vote'),
