@@ -30,7 +30,15 @@ class Profile(models.Model):
 
     @property
     def reviewers(self):
-        queryset = self.review_set.all().values_list('owner__id', flat=True)
+        queryset = Review.objects.values_list('owner__id', flat=True)
+        return queryset
+
+    def reviewersList(self):
+        queryset = Review.objects.filter(vote=self.id)
+        return queryset
+
+    def reviewersListId(self):
+        queryset = Review.objects.filter(vote=self.id).values_list('owner__id', flat=True)
         return queryset
 
     def getVoteCount(self):
