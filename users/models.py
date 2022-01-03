@@ -34,9 +34,9 @@ class Profile(models.Model):
         return queryset
 
     def getVoteCount(self):
-        review = self.review_set.all()
+        review=Review.objects.filter(vote=self.id)
         upVotes = review.filter(value='up').count()
-        totalVotes = review.count() +2
+        totalVotes = review.count()
 
         ration = (upVotes / totalVotes) * 100
         self.vote_total = totalVotes
