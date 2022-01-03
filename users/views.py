@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from.models import Profile
-from .forms import ProfileForm,SkillForm,GuideForm
+from .forms import ProfileForm,SkillForm,GuideForm, ReviewForm
 from django.contrib import messages
 from .utils import searchProfiles
 
@@ -20,8 +20,22 @@ def guideProfile(request,pk):
     topSkills = profile.skill_set.exclude(description__exact="")
     otherSkills = profile.skill_set.filter(description="")
 
+    form = ReviewForm()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        review = form.save(commit = False)
+        review.vote = profile
+        review.owner = request.user.profile
+        review.save()
+        profile.getVoteCount()
+        messages.success(request, 'Succefully Vote.')
+        return redirect('guide-profile',pk=profile.id)
+    else:
+        messages.error(request, 'Already Vote')
+
     context = {'profile': profile,'topSkills':topSkills,
-                'otherSkills':otherSkills}
+                'otherSkills':otherSkills, 'form':form}
     return render(request,'users/guide-profile.html',context)
 
 @login_required(login_url='login')
@@ -105,3 +119,4 @@ def deleteSkill(request, pk):
 
     context = {'object': skill}
     return render(request, 'delete_template.html', context)
+

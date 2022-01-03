@@ -18,7 +18,6 @@
               {% else %}
               <a href="{% url 'signin' %}?next={{request.path}}">Please login to send message</a>
               {% endif %}
-
             </div>
           </div>
         </div>
@@ -76,11 +75,47 @@
               </div>
             {% endfor %}
 
-              
-
-             
             </div>
+            <h3 class="singleProject__subtitle">Feedback</h3>
+            <h5 class="project--rating"> {{profile.vote_ration}}% Postitive Feedback ({{profile.vote_total}} Vote{{profile.vote_total|pluralize:"s"}})
+            </h5>
+            {% if request.user.profile.id in profile.reviewersListId %}
+            <p>You have already submitted your review for this guide</p>
+            {% elif request.user.profile == profile.owner %}
+            <p>You cannot review your own guide</p>
+            {% elif request.user.is_authenticated %}
+              <!-- Form to print the vote and selection-->
+            <form class="form" action="{% url 'guide-profile' profile.id %}" method="POST">
+              {% csrf_token %}
+              {% for field in form %}
+              <div class="form__field">
+                <label for="formInput#textarea">{{field.label}}</label>
+                {{ field }}
+              </div>
+              {% endfor%}
+              <input class="btn btn--sub btn--lg" type="submit" value="Comments" />
+            </form>
+            {% else %}
+            <a href="{% url 'signin' %}?next={{request.path}}">Please login to leave a review</a>
+            {% endif %}
           </div>
+          <div class="commentList">
+
+              {% for review in profile.reviewersList %}
+              {% if review.body %}
+              <div class="comment">
+                <a href="{% url  'guide-profile' review.owner.id %}">
+                  <img class="avatar avatar--md"
+                    src="{{review.owner.profile_image.url}}" alt="user" />
+                </a>
+                <div class="comment__details">
+                  <a href="{% url  'guide-profile' review.owner.id %}" class="comment__author">{{ review.owner.name }}</a>
+                  <p class="comment__info">{{review.body|linebreaksbr}}</p>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
         </div>
       </div>
     </div>

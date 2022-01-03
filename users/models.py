@@ -20,11 +20,54 @@ class Profile(models.Model):
     guide_confirmation = models.ImageField(
         null=True, blank=True, upload_to='profiles/')
     admin_approved=models.BooleanField(default=False)
+    vote_total = models.IntegerField(default=0, null=True, blank=True)  # all the vote that the trips has
+    vote_ration = models.IntegerField(default=0, null=True, blank=True)  # the ration betwen negative and positive
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True,editable=False)
 
     def __str__(self): 
         return str(self.username)
+
+    @property
+    def reviewers(self):
+        queryset = Review.objects.values_list('owner__id', flat=True)
+        return queryset
+
+    def reviewersList(self):
+        queryset = Review.objects.filter(vote=self.id)
+        return queryset
+
+    def reviewersListId(self):
+        queryset = Review.objects.filter(vote=self.id).values_list('owner__id', flat=True)
+        return queryset
+
+    def getVoteCount(self):
+        review=Review.objects.filter(vote=self.id)
+        upVotes = review.filter(value='up').count()
+        totalVotes = review.count()
+
+        ration = (upVotes / totalVotes) * 100
+        self.vote_total = totalVotes
+        self.vote_ration = ration
+        self.save()
+
+class Review(models.Model):
+    VOTE_TYPE = (
+        ('up', 'Up Vote'),
+        ('down', 'Down Vote'),
+    )
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True,related_name = "owner")
+    vote = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True,related_name = "vote")
+    body = models.TextField(null=True, blank=True)
+    value = models.CharField(max_length=200,null=True, choices= VOTE_TYPE)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True,editable=False)
+
+    class Meta:
+        unique_together = [['owner','vote']]
+
+
+    def __str__(self):
+        return self.value
 
 class Skill(models.Model): 
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True,blank=True)
