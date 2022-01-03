@@ -26,6 +26,7 @@
             <h3 class="devInfo__title">About Me</h3>
             <p class="devInfo__about">{{ profile.bio }}</p>
           </div>
+          {% ifnotequal  profile.user.groups.all.0.name "traveler" %}
           <div class="devInfo">
             <h3 class="devInfo__title">Skills</h3>
             <div class="devInfo__skills">
@@ -46,7 +47,9 @@
 
               </div>
             </div>
+            {% endifnotequal%}
           </div>
+           {% ifnotequal  profile.user.groups.all.0.name "traveler" %}
           <div class="devInfo">
             <h3 class="devInfo__title">Trips</h3>
             <div class="grid grid--two">
@@ -98,7 +101,9 @@
             {% else %}
             <a href="{% url 'signin' %}?next={{request.path}}">Please login to leave a review</a>
             {% endif %}
+            {% endifnotequal%}
           </div>
+
           <div class="commentList">
 
               {% for review in profile.reviewersList %}
