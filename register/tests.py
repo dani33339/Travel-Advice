@@ -1,4 +1,4 @@
-from django.test import TestCase,Client
+from django.test import TestCase
 from django.contrib.auth import get_user_model,authenticate
 from .forms import UpdateForm
 from .views import signup,signin,update_profile,logout
@@ -9,8 +9,6 @@ from django.contrib.auth.decorators import login_required
 User = get_user_model()
 
 class main_Test_Cases(TestCase):
-   def setUp(self):
-      self.client = Client()
 
    def test_signup(self):
        """tests for signup"""

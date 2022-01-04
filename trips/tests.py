@@ -1,4 +1,4 @@
-from django.test import TestCase,Client
+from django.test import TestCase
 from django.contrib.auth import get_user_model
 from .models import Trip, Review, Tag
 from users.models import Profile
@@ -6,9 +6,6 @@ from users.models import Profile
 User = get_user_model()
 
 class main_Test_Cases(TestCase):
-   def setUp(self):
-      #The test client is a Python class that acts as a dummy web browser, allowing you to test your views and interact with your Django-powered application programmatically.
-      self.client = Client()
 
    def test_Trip(self):
       """tests for trips"""
@@ -29,11 +26,6 @@ class main_Test_Cases(TestCase):
       self.assertEqual(Trip.objects.filter(title="test1").count(), 0) #count trips with the name test1 should be 0
       self.assertEqual(Trip.objects.all().count(), 1) #count trips in the db should be 0
 
-      #test if the profile2 has its own page
-      #response = self.client.get('/users/profile/<str:pk>/')#get the address of this post page
-      #self.assertEqual(response.status_code, 200)#check if the page exits or there is an error
-      #self.assertTemplateUsed(response, 'users/guide-profile.html')#checks that the template with the given name was used in rendering the response
-      #self.assertContains(response, 'test profile2')#test if test post content appers on the page
 
 
    def test_Review(self):
