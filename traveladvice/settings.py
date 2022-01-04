@@ -159,9 +159,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'traveladvice2022@gmail.com'
 EMAIL_HOST_PASSWORD = 'traveladvice2022'
 
-import os
+"""import os
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv()"""
 
 CONTACT_EMAIL = 'example@gmail.com'
 ADMIN_EMAIL = ['traveladvice2022@gmail.com', ]
