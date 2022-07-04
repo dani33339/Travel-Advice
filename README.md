@@ -1,4 +1,5 @@
-hello, 
+Travel Advice-travel website with a forum- Django framework Python, HTML, CSS,Unit tests.
+The site have 3 types of user's admin,guide,traveller
 In order to run our website you should install django,after that you need to pull the project from master branch
 and install the following pip's in your cmd/terminal
 
@@ -17,20 +18,19 @@ pip install Pillow
 
 pip install django-crispy-forms
 
-after the installation of the pip's you need to write the following command in your terminal :
-
 pip install whitenoise
 
 -With a couple of lines of config WhiteNoise allows your web app to serve its own static files
 
 pip install django python-dotenv
 
+After the installation of the pip's you need to write the following command in your terminal :
 
 python manage.py runserver
 
-after that the website will be online on : http://127.0.0.1:8000/
+After that the website will be online on : http://127.0.0.1:8000/
 
-in order to acssess to the databases you need to run the website and then go to http://127.0.0.1:8000/admin
+In order to acssess to the databases you need to run the website and then go to http://127.0.0.1:8000/admin
 and login in to the admin panel:
 user: admin
 password: 123456
@@ -44,3 +44,10 @@ Pavel - pavelko@ac.sce.ac.il
 Anton - antonvo@ac.sce.ac.il
 Daniel - daniema14@ac.sce.ac.il
 Orel - orelma2@ac.sce.ac.il
+
+Picture's from the project
+![3 3](https://user-images.githubusercontent.com/93151766/177186665-c150ea23-fc7d-44ae-9ce5-4c42b43e1e0e.png)
+![3 2](https://user-images.githubusercontent.com/93151766/177186667-05fae2b0-8227-4016-8a84-111e9e8634c2.png)
+
+![3 1](https://user-images.githubusercontent.com/93151766/177186653-88f4a266-02b2-4881-b4a8-14e8a7612fee.png)
+
