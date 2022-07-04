@@ -1,4 +1,5 @@
-hello, 
+Travel Advice-travel website with a forum- Django framework Python, HTML, CSS,Unit tests.
+
 In order to run our website you should install django,after that you need to pull the project from master branch
 and install the following pip's in your cmd/terminal
 
