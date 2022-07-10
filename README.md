@@ -1,5 +1,5 @@
 Travel Advice-travel website with a forum- Django framework Python, HTML, CSS,Unit tests.
-The site has 3 types of user's admin,guide,traveller
+The site has 3 types of user's admin,guide,traveller.
 A short video of the project:
 https://www.youtube.com/watch?v=DckdLimXV8k
 
