@@ -1,54 +1,34 @@
-Travel Advice-travel website with a forum- Django framework Python, HTML, CSS,Unit tests.
-The site has 3 types of user's admin,guide,traveller.
-A short video of the project:
-https://www.youtube.com/watch?v=DckdLimXV8k
+# Travel Advice
 
-In order to run our website you should install django,after that you need to pull the project from master branch
-and install the following pip's in your cmd/terminal
+**Travel Advice** is a travel website that helps to connect between travelers and guides built with the **Django** framework, Python, HTML, and CSS. The platform features a forum where users can share their travel experiences and advice.
 
-installations made:
-pip install django-resized 
-- in order to resize images for the profile 
+It supports three types of users: **Admin**, **Guide**, and **Traveller**. 
 
-pip install django-tinymce
-- django-tinymce is a Django application that contains a widget to render a form field as a TinyMCE editor.
+### Key Features:
+- **User Types**: Admin, Guide, and Traveller roles with specific access permissions.
+- **Forum**: A space for travellers to share advice and experiences.
+- **Admin Panel**: Provides backend access for managing users, posts, and other site features.
+- **Unit Testing**: Ensures reliability and functionality through comprehensive unit tests.
 
-pip install django-taggit 
-- Django-Taggit is a Django application which is used to add tags to blogs, articles etc. It makes very easy for us to make adding the tags functionality to our django project
+### Video Demo:
+Watch a short video showcasing the project:  
+[Travel Advice - Demo Video](https://www.youtube.com/watch?v=DckdLimXV8k)
 
-pip install Pillow
--PIL is the Python Imaging Library 
+### Admin Panel:
+To access the admin panel, navigate to:
+[http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+Use the following login credentials:
+- **Username**: admin
+- **Password**: 123456
 
-pip install django-crispy-forms
-
-pip install whitenoise
-
--With a couple of lines of config WhiteNoise allows your web app to serve its own static files
-
-pip install django python-dotenv
-
-After the installation of the pip's you need to write the following command in your terminal :
-
-python manage.py runserver
-
-After that the website will be online on : http://127.0.0.1:8000/
-
-In order to acssess to the databases you need to run the website and then go to http://127.0.0.1:8000/admin
-and login in to the admin panel:
-user: admin
-password: 123456
-
-in order to run unit tests you need to write the following command in your terminal :
-
+### Running Unit Tests:
+To run the unit tests, use the following command:
+```bash
 python manage.py test
+```
 
-for any questions feel free to contact us
-Pavel - pavelko@ac.sce.ac.il
-Anton - antonvo@ac.sce.ac.il
-Daniel - daniema14@ac.sce.ac.il
-Orel - orelma2@ac.sce.ac.il
+Project Screenshots:
 
-Picture's from the project
 ![3 1](https://user-images.githubusercontent.com/93151766/177186653-88f4a266-02b2-4881-b4a8-14e8a7612fee.png)
 
 ![3 2](https://user-images.githubusercontent.com/93151766/177186667-05fae2b0-8227-4016-8a84-111e9e8634c2.png)
