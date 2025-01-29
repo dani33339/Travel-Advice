@@ -14,19 +14,6 @@ It supports three types of users: **Admin**, **Guide**, and **Traveller**.
 Watch a short video showcasing the project:  
 [Travel Advice - Demo Video](https://www.youtube.com/watch?v=DckdLimXV8k)
 
-### Admin Panel:
-To access the admin panel, navigate to:
-[http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
-Use the following login credentials:
-- **Username**: admin
-- **Password**: 123456
-
-### Running Unit Tests:
-To run the unit tests, use the following command:
-```bash
-python manage.py test
-```
-
 Project Screenshots:
 
 ![3 1](https://user-images.githubusercontent.com/93151766/177186653-88f4a266-02b2-4881-b4a8-14e8a7612fee.png)
